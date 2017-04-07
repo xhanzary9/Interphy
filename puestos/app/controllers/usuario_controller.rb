@@ -1,5 +1,6 @@
 class UsuarioController < ApplicationController
   def iniciarSesion
+  	
   end
 
   def cerrarSesion
