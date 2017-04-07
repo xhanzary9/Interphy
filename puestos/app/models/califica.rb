@@ -1,0 +1,2 @@
+class Califica < ApplicationRecord
+end
