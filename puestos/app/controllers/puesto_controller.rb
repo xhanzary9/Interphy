@@ -3,6 +3,13 @@ class PuestoController < ApplicationController
   end
 
   def verPuesto
+    id = params['id']
+    p = Puesto.find(id)
+    if p.nil?
+    @puesto = p
+    else
+    @puesto = Puesto.new
+    end
   end
 
   def crearComentario
@@ -17,8 +24,12 @@ class PuestoController < ApplicationController
     imagen = params['imagen']
     p = Puesto.new
     p.nombre = nombre
-    p.numPuesto = numPuesto
+    p.numPuestoUNAM = numPuesto
     p.imagen = imagen
-    p.save
+    if p.save
+        flash[:mensaje] = 'chido'
+    else
+        flash[:mensaje] = 'chale'
+    end
   end
 end
