@@ -3,10 +3,11 @@ class PuestoController < ApplicationController
   end
 
   def verPuesto
-    id = params['id']
-    p = Puesto.find(id)
+    #id = params['id']
+    #p = Puesto.find(id)
     if p.nil?
-    @puesto = p
+      @puesto =  Puesto.find(params[:idPuesto])
+    #@puesto = p
     else
     @puesto = Puesto.new
     end
