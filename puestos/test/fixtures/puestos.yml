@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  numPuestoUNAM: 1
+  imagen: MyString
+  horario: 2017-04-18 17:31:21
+  info_general: MyString
+  coordenadas: MyString
+
+two:
+  nombre: MyString
+  numPuestoUNAM: 1
+  imagen: MyString
+  horario: 2017-04-18 17:31:21
+  info_general: MyString
+  coordenadas: MyString
