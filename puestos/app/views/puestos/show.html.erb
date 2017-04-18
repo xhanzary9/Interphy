@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @puesto.nombre %>
+</p>
+
+<p>
+  <strong>Numpuestounam:</strong>
+  <%= @puesto.numPuestoUNAM %>
+</p>
+
+<p>
+  <strong>Imagen:</strong>
+  <%= @puesto.imagen %>
+</p>
+
+<p>
+  <strong>Horario:</strong>
+  <%= @puesto.horario %>
+</p>
+
+<p>
+  <strong>Info general:</strong>
+  <%= @puesto.info_general %>
+</p>
+
+<p>
+  <strong>Coordenadas:</strong>
+  <%= @puesto.coordenadas %>
+</p>
+
+<%= link_to 'Edit', edit_puesto_path(@puesto) %> |
+<%= link_to 'Back', puestos_path %>

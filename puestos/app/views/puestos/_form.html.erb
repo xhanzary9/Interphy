@@ -1,0 +1,47 @@
+<%= form_for(puesto) do |f| %>
+  <% if puesto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(puesto.errors.count, "error") %> prohibited this puesto from being saved:</h2>
+
+      <ul>
+      <% puesto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numPuestoUNAM %>
+    <%= f.number_field :numPuestoUNAM %>
+  </div>
+
+  <div class="field">
+    <%= f.label :imagen %>
+    <%= f.text_field :imagen %>
+  </div>
+
+  <div class="field">
+    <%= f.label :horario %>
+    <%= f.time_select :horario %>
+  </div>
+
+  <div class="field">
+    <%= f.label :info_general %>
+    <%= f.text_field :info_general %>
+  </div>
+
+  <div class="field">
+    <%= f.label :coordenadas %>
+    <%= f.text_field :coordenadas %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
