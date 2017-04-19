@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418223121) do
+ActiveRecord::Schema.define(version: 20170419223505) do
+
+  create_table "calificas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "user_id"
+    t.integer  "puesto_id"
+    t.text     "comentario", limit: 65535
+    t.bigint   "estrellas"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["puesto_id"], name: "index_calificas_on_puesto_id", using: :btree
+    t.index ["user_id"], name: "index_calificas_on_user_id", using: :btree
+  end
+
+  create_table "comidas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text     "tipo",       limit: 65535
+    t.float    "costo",      limit: 24
+    t.integer  "puesto_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["puesto_id"], name: "index_comidas_on_puesto_id", using: :btree
+  end
 
   create_table "puestos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "nombre"
@@ -40,4 +60,7 @@ ActiveRecord::Schema.define(version: 20170418223121) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "calificas", "puestos"
+  add_foreign_key "calificas", "users"
+  add_foreign_key "comidas", "puestos"
 end
