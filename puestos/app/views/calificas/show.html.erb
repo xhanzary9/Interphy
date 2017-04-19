@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @califica.user %>
+</p>
+
+<p>
+  <strong>Puesto:</strong>
+  <%= @califica.puesto %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @califica.comentario %>
+</p>
+
+<p>
+  <strong>Estrellas:</strong>
+  <%= @califica.estrellas %>
+</p>
+
+<%= link_to 'Edit', edit_califica_path(@califica) %> |
+<%= link_to 'Back', calificas_path %>
