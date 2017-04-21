@@ -13,5 +13,29 @@
  *= require_tree .
  *= require_self
  */
-@import "materialize";
-@import "materialize/extras/nouislider";
+ @import "materialize";
+ @import "materialize/extras/nouislider";
+ body {
+ 	display: flex;
+ 	min-height: 100vh;
+ 	flex-direction: column;
+    background-color: #f9f7ea;
+
+ }
+
+ main {
+ 	flex: 1 0 auto;
+ }
+ ul.right.hide-on-med-and-down {
+ 	margin-top: 1.5em;
+ }
+.page-footer {
+    background-color: #1E1E1E;
+}
+nav {
+    /*background-color: #679334;*/
+    background-color: #1E1E1E;
+}
+h1{
+	color: #679334;
+}
