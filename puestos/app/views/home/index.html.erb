@@ -1,4 +1,5 @@
 <div class="container home">
 	<img class="logo" src="/images/logo.svg" width="400px" align="center">
-	<p><%=link_to"Navegar Puestos",principal_index_path%></p>
+	
+	<%= link_to "Navegar en los Puestos".html_safe, principal_index_path, :class=>"waves-effect waves-light btn navega" %>
 </div>

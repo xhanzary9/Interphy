@@ -15,27 +15,47 @@
  */
  @import "materialize";
  @import "materialize/extras/nouislider";
+ @font-face {
+ 	font-family: 'Cookie';    
+ 	src: url('/fonts/Cookie.ttf');
+ 	font-weight: normal;
+ 	font-style: normal;
+ }
+
  body {
  	display: flex;
  	min-height: 100vh;
  	flex-direction: column;
-    background-color: #f9f7ea;
-
+ 	background-color: #f9f7ea;
  }
-
  main {
  	flex: 1 0 auto;
  }
  ul.right.hide-on-med-and-down {
  	margin-top: 1.5em;
  }
-.page-footer {
-    background-color: #1E1E1E;
-}
-nav {
-    /*background-color: #679334;*/
-    background-color: #1E1E1E;
-}
-h1{
-	color: #679334;
-}
+ .page-footer {
+ 	background-color: #1E1E1E;
+ }
+ nav {
+ 	background-color: #1E1E1E;
+ }
+ h1{
+ 	color: #679334;
+ }
+ h5.interphy {
+ 	font-family: Cookie;
+ 	color: white;
+ 	font-size: -webkit-xxx-large;
+ }
+ h5 {
+ 	font-size: 1.64rem;
+ 	line-height: 110%;
+ 	margin: 0.82rem 0 0.656rem 0;
+ 	display: inline;
+ }
+ a.waves-effect.waves-light.btn.navega {
+ 	background-color: #679334;
+ 	color: white;
+ 	margin: 2em 0;
+ }

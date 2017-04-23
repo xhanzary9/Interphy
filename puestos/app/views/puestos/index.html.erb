@@ -34,8 +34,11 @@
 
 <br>
 
-<%= link_to 'New Puesto', new_puesto_path %>
 <p><%=link_to"Crear Comida",new_comida_path%></p>
 <p><%=link_to"Ver Comida",comidas_path%></p>
 
-<p><%=link_to"Regresar",principal_index_path%></p>
+<div class="fixed-action-btn">
+  <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>
+</div>
+
+<%= link_to "navigate_before".html_safe, principal_index_path, :class=>"medium material-icons" %>
