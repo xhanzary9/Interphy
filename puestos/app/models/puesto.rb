@@ -1,2 +1,3 @@
 class Puesto < ApplicationRecord
+
 end
