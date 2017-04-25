@@ -1,0 +1,8 @@
+<%if user_signed_in? && current_user.isAdmin?%>
+	<% @users = User.all%>
+	<% @users.each do |u|%>
+		<%= u.email%><br/>
+	<%end%>
+<%else%>
+	<%= current_user.email%><br/>
+<%end%>

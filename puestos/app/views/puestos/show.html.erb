@@ -81,8 +81,37 @@
 </p>
 -->
 <h2>Comentarios</h2>
-<%= link_to 'Edit', edit_puesto_path(@puesto) %> |
-<%= link_to 'Back', puestos_path %>
+<% @puesto.calificas.each do |c|%>
+  <%= c.user.email%>:
+  <%= c.comentario%>
+<%end%>
+
+
+<%if user_signed_in?%>
+<%= link_to "Añade un comentario", new_califica_path%>
+<%if false%>
+  <h3>Añade un comentario</h3>
+  <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
+    <p>
+      <%= f.label :comentario %><br>
+      <%= f.text_area :comentario %>
+    </p>
+    <p>
+      <%= f.label :estrellas%>
+      <%= f.number_field :estrellas%>  
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+  <%end%>
+<%end%>
+
+
+<%if user_signed_in? && current_user.isAdmin?%>
+  <%= link_to 'Edit', edit_puesto_path(@puesto) %> 
+<%end%>
+<%= link_to "Back".html_safe, puestos_path %>
 </div>
 
 <script type="text/javascript" >

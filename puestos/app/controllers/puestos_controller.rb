@@ -10,6 +10,7 @@ class PuestosController < ApplicationController
   # GET /puestos/1
   # GET /puestos/1.json
   def show
+    @califica = Puesto.find(params[:id]).calificas
   end
 
   # GET /puestos/new

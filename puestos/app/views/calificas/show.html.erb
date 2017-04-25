@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @califica.user %>
+  <%= @califica.user.email %>
 </p>
 
 <p>
   <strong>Puesto:</strong>
-  <%= @califica.puesto %>
+  <%= @califica.puesto.nombre %>
 </p>
 
 <p>
@@ -21,4 +21,4 @@
 </p>
 
 <%= link_to 'Edit', edit_califica_path(@califica) %> |
-<%= link_to 'Back', calificas_path %>
+<%= link_to 'Back', puestos_path %>

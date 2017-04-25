@@ -69,6 +69,7 @@ class CalificasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def califica_params
+      @user_id = current_user.id
       params.require(:califica).permit(:user_id, :puesto_id, :comentario, :estrellas)
     end
 end
