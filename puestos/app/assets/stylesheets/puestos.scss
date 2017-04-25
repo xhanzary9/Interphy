@@ -20,6 +20,7 @@ a.btn-floating.btn-large.large.material-icons {
 	display:inline-block;
 	margin: 0;
 	padding:0;
+	position: relative !important;
 }
 
 .puestos,.puestoDetalles {
@@ -43,8 +44,8 @@ a.btn-floating.btn-large.large.material-icons {
 }
 
 .visibility {
-	position: absolute;
-    right: 40px;
+	position: absolute !important;
+    right: 40px !important;
 
 }
 
@@ -58,4 +59,8 @@ a.btn-floating.btn-large.large.material-icons {
 	display:inline-block;
 	margin:0 !important;
 	padding:0;
+}
+
+.card-panel {
+    background-color: #679334 !important;
 }
