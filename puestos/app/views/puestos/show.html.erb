@@ -1,5 +1,55 @@
-<p id="notice"><%= notice %></p>
+   <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+       <div class="slider">
+    <ul class="slides">
+      <li>
+        <img class="activator" src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img class="activator" src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Left Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img class="activator" src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+        <div class="caption right-align">
+          <h3>Right Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img class="activator" src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4"><%= @puesto.nombre %><i class="material-icons right">close</i></span>
+      <p>
+        <strong>Horario:</strong>
+        <%= @puesto.horario %>
+      </p>
+      <p>
+        <strong>Info general:</strong>
+        <%= @puesto.info_general %>
+      </p>
+    </div>
+  </div>
 
+
+<div class = "puestoDetalles">
+<p id="notice"><%= notice %></p>
+<!--
 <p>
   <strong>Nombre:</strong>
   <%= @puesto.nombre %>
@@ -29,6 +79,17 @@
   <strong>Coordenadas:</strong>
   <%= @puesto.coordenadas %>
 </p>
-
+-->
+<h2>Comentarios</h2>
 <%= link_to 'Edit', edit_puesto_path(@puesto) %> |
 <%= link_to 'Back', puestos_path %>
+</div>
+
+<script type="text/javascript" >
+      $(document).ready(function(){
+      $('.slider').slider();
+      $('.slider').height(400);
+    });
+
+ $('div.card').parents('.container').css({'width': '100%', 'max-width': '1980px'});
+</script>

@@ -1,3 +1,61 @@
 // Place all the styles related to the Puestos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+a.btn-floating.btn-large.large.material-icons {
+	color: white;
+	line-height: 2; 
+	background-color: #679334;
+}
+
+
+.container:has(> #hola) {
+    width: 100% !important;
+    max-width: 1980px !important;
+}
+
+.map{
+	width: 65% !important; 
+	height: 610px;
+	display:inline-block;
+	margin: 0;
+	padding:0;
+}
+
+.puestos,.puestoDetalles {
+	display:inline-block;
+	vertical-align: top;
+    margin: 0 2%;
+    position: absolute;
+}
+.tamanio {
+	height: 50px;
+}
+
+.user {
+    width: 50px !important;	
+}
+
+.card-panel span {
+    margin-left: 10px;
+    position: relative;
+    top: -49%;
+}
+
+.visibility {
+	position: absolute;
+    right: 40px;
+
+}
+
+.indicators {
+	bottom: 15% !important;
+    z-index: 10 !important;
+}
+
+.card {
+	width: 65% !important;
+	display:inline-block;
+	margin:0 !important;
+	padding:0;
+}
