@@ -83,7 +83,7 @@
 <h2>Comentarios</h2>
 <% @puesto.calificas.each do |c|%>
   <%= c.user.email%>:
-  <%= c.comentario%>
+  <%= c.comentario%><br>
 <%end%>
 
 
@@ -106,13 +106,13 @@
   <% end %>
   <%end%>
 <%end%>
-
+</div>
 
 <%if user_signed_in? && current_user.isAdmin?%>
-  <%= link_to 'Edit', edit_puesto_path(@puesto) %> 
+  <%= link_to 'Editar puesto', edit_puesto_path(@puesto) %> 
 <%end%>
-<%= link_to "Back".html_safe, puestos_path %>
-</div>
+<%= link_to "Regresar".html_safe, puestos_path %>
+
 
 <script type="text/javascript" >
       $(document).ready(function(){
