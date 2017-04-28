@@ -44,8 +44,9 @@ a.btn-floating.btn-large.large.material-icons {
 }
 
 .visibility {
-	position: absolute !important;
-    right: 40px !important;
+	
+    left: 92% !important;
+    position: relative;
 
 }
 
@@ -63,4 +64,9 @@ a.btn-floating.btn-large.large.material-icons {
 
 .card-panel {
     background-color: #679334 !important;
+}
+.row.enlistaPuestos{
+	overflow: auto !important;
+    height: 500px !important;
+
 }
