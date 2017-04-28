@@ -1,7 +1,7 @@
 
 
 <div class ="hola"style='width: 100%;'> 
-    <div id="multi_markers2" class = "map"></div>
+    <div id="multi_markers" class = "map"></div>
     <script type="text/javascript" async defer>
     var mapStyle = [
     {
@@ -139,20 +139,12 @@
 
     var handler = Gmaps.build('Google');
     handler.buildMap({ internal: {id: 'multi_markers'},provider: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles:    mapStyle
+            mapTypeId: 'roadmap',
+            styles:    mapStyle
     }}, function(){
-      var markers = handler.addMarkers([
-        { lat: 19.324247, lng: -99.179237, name: 'Puesto 1', infowindow: "Puesto 1"},
-        { lat: 19.324257, lng: -99.179135, name: 'Puesto 2', infowindow: "Puesto 2" },
-        { lat: 19.323533, lng: -99.180790, name: 'Puesto 3', infowindow: "Puesto 3", picture: {
-            url: "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
-            width:  100,
-            height: 100
-        }}
-        ]);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
+            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
     });
             
 </script>

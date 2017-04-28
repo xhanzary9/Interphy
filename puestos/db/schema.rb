@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425191527) do
+ActiveRecord::Schema.define(version: 20170426235355) do
 
   create_table "calificas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20170425191527) do
     t.string   "coordenadas"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "lat"
+    t.string   "lng"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

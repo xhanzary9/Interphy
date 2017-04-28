@@ -5,6 +5,11 @@ class PuestosController < ApplicationController
   # GET /puestos.json
   def index
     @puestos = Puesto.all
+    @hash = Gmaps4rails.build_markers(@puestos) do |puesto, marker|
+    marker.lat puesto.lat
+    marker.lng puesto.lng
+    marker.infowindow puesto.nombre
+end
   end
 
   # GET /puestos/1
@@ -70,6 +75,6 @@ class PuestosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def puesto_params
-      params.require(:puesto).permit(:nombre, :numPuestoUNAM, :imagen, :horario, :info_general, :coordenadas)
+      params.require(:puesto).permit(:nombre, :numPuestoUNAM, :imagen, :horario, :info_general, :coordenadas, :lat, :lng)
     end
 end
