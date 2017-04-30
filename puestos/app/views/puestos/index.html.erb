@@ -1,159 +1,10 @@
 
 
 <div class ="hola"style='width: 100%;'> 
-    <div id="multi_markers" class = "map"></div>
-
-
-
-    <script type="text/javascript" async defer>
-        var mapStyle = [
-        {
-            "featureType": "water",
-            "stylers": [
-            {
-                "color": "#021019"
-            }
-            ]
-        },
-        {
-            "featureType": "landscape",
-            "stylers": [
-            {
-                "color": "#08304b"
-            }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
-            {
-                "color": "#0c4152"
-            },
-            {
-                "lightness": 5
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry.fill",
-            "stylers": [
-            {
-                "color": "#000000"
-            }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry.stroke",
-            "stylers": [
-            {
-                "color": "#0b434f"
-            },
-            {
-                "lightness": 25
-            }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "geometry.fill",
-            "stylers": [
-            {
-                "color": "#000000"
-            }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "geometry.stroke",
-            "stylers": [
-            {
-                "color": "#0b3d51"
-            },
-            {
-                "lightness": 16
-            }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "geometry",
-            "stylers": [
-            {
-                "color": "#000000"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.fill",
-            "stylers": [
-            {
-                "color": "#ffffff"
-            }
-            ]
-        },
-        {
-            "elementType": "labels.text.stroke",
-            "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 13
-            }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "stylers": [
-            {
-                "color": "#146474"
-            }
-            ]
-        },
-        {
-            "featureType": "administrative",
-            "elementType": "geometry.fill",
-            "stylers": [
-            {
-                "color": "#000000"
-            }
-            ]
-        },
-        {
-            "featureType": "administrative",
-            "elementType": "geometry.stroke",
-            "stylers": [
-            {
-                "color": "#144b53"
-            },
-            {
-                "lightness": 14
-            },
-            {
-                "weight": 1.4
-            }
-            ]
-        }
-        ];
-
-
-        var handler = Gmaps.build('Google');
-        handler.buildMap({ internal: {id: 'multi_markers'},provider: {
-            mapTypeId: 'roadmap',
-            styles:    mapStyle
-        }}, function(){
-            markers = handler.addMarkers(<%=raw @hash.to_json %>);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-        });
-
-    </script>
+    <div id="MapaPuestos" class = "map"></div>
     <div class = "puestos">
         <h1>Puestos</h1>
-        <div class="row enlistaPuestos">
+        <div class="row enlistaPuestos style-10">
           <% @puestos.each do |puesto| %>
           <div class="col m12">
             <div class="card-panel" style="width : 410px ">
@@ -176,6 +27,25 @@
 <%end%>
 <br>
 <%= link_to "navigate_before".html_safe, root_path, :class=>"medium material-icons" %>
+
+
+<script  type="text/javascript" async defer>
+  
+  /*
+  *Se crea el mapa con todos los markers de los puestos existentes
+  */
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'MapaPuestos'},provider: {
+          mapTypeId: 'roadmap',
+          styles:    mapStyle
+      }}, function(){
+          markers = handler.addMarkers(<%=raw @hash.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+      });
+
+</script>
+
 
 <!--
 <h1>Puestos</h1>
@@ -210,4 +80,16 @@
 </table>
 
 <br>-->
+
+
+
+
+
+
+
+
+
+
+
+
 

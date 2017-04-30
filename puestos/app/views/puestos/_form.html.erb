@@ -1,3 +1,4 @@
+
 <%= form_for(puesto) do |f| %>
   <% if puesto.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +11,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :nombre %>
     <%= f.text_field :nombre %>
@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= f.label :horario %>
-    <%= f.text_field :horario %>
+    <%= f.time_field :horario %>
   </div>
 
   <div class="field">
@@ -37,21 +37,76 @@
   </div>
 
   <div class="field">
-    <%= f.label :coordenadas %>
-    <%= f.text_field :coordenadas %>
+    <%= f.hidden_field :coordenadas %>
   </div>
 
   <div class="field">
-    <%= f.label :lat %>
-    <%= f.text_field :lat %>
+    <%= f.hidden_field :lat %>
   </div>
 
   <div class="field">
-    <%= f.label :lng %>
-    <%= f.text_field :lng %>
+    <%= f.hidden_field :lng %>
   </div>
+
+  <div class =""style='width: 100%;'> 
+      <div id="MapaEditar" class = "mapEdit"></div>
+  </div>
+
+  <br>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript" async defer>
+  
+/*
+*Se crea el mapa con todos los markers de los puestos existentes y uno para editar o
+*crear el maker del puesto que se creara o editara
+*/
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {styles: mapStyle}, internal: {id: 'MapaEditar'}}, function(){
+      marker = handler.addMarkers(
+        [
+          {
+            <%if defined?(@puestoe) %>
+              <% if @puestoe.lat != " " && @puestoe.lng != " " %>
+                "lat": <%= @puestoe.lat %>,
+                "lng": <%= @puestoe.lng %>,
+                <% else %>
+                "lat": 19.323657, 
+                "lng": -99.179663,
+              <% end %>
+            <% else %>
+              "lat": 19.323657, 
+              "lng": -99.179663,
+            <% end %>
+            picture: {
+            url: "https://i.stack.imgur.com/rU427.png",
+            width:  21,
+            height: 36,
+            },
+          }
+        ]
+      ,{ draggable: true}
+      );
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+
+      // Move existing marker
+      google.maps.event.addListener(marker[0].serviceObject, 'dragend', function() {
+        updateFormLocation(this.getPosition());
+      });
+    });
+
+    // Update form attributes with given coordinates
+    function updateFormLocation(latLng) {
+      $('#puesto_lat').val(latLng.lat());
+      $('#puesto_lng').val(latLng.lng());
+      console.log("coordenadas:" + latLng.lat() + latLng.lng());
+    }
+
+</script>
+  

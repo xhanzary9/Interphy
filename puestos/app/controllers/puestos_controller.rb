@@ -6,10 +6,10 @@ class PuestosController < ApplicationController
   def index
     @puestos = Puesto.all
     @hash = Gmaps4rails.build_markers(@puestos) do |puesto, marker|
-    marker.lat puesto.lat
-    marker.lng puesto.lng
-    marker.infowindow puesto.nombre
-end
+      marker.lat puesto.lat
+      marker.lng puesto.lng
+      marker.infowindow puesto.nombre
+    end
   end
 
   # GET /puestos/1
@@ -21,10 +21,23 @@ end
   # GET /puestos/new
   def new
     @puesto = Puesto.new
+    @puestos = Puesto.all
+    @hash = Gmaps4rails.build_markers(@puestos) do |puesto, marker|
+      marker.lat puesto.lat
+      marker.lng puesto.lng
+      marker.infowindow puesto.nombre
+    end
   end
 
   # GET /puestos/1/edit
   def edit
+    @puestoe = Puesto.find(params[:id])
+    @puestos = Puesto.all
+    @hash = Gmaps4rails.build_markers(@puestos) do |puesto, marker|
+      marker.lat puesto.lat
+      marker.lng puesto.lng
+      marker.infowindow puesto.nombre
+    end
   end
 
   # POST /puestos

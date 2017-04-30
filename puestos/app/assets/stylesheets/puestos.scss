@@ -23,6 +23,11 @@ a.btn-floating.btn-large.large.material-icons {
 	position: relative !important;
 }
 
+.mapEdit{
+    width: 100% !important;
+    height: 400px;
+}
+
 .puestos,.puestoDetalles {
 	display:inline-block;
 	vertical-align: top;
@@ -66,7 +71,25 @@ a.btn-floating.btn-large.large.material-icons {
     background-color: #679334 !important;
 }
 .row.enlistaPuestos{
-	overflow: auto !important;
-    height: 500px !important;
+    overflow-y: hidden !important;
+    float: left !important;
+    max-height: 480px !important;
+    padding: 0px !important;
 
+}
+
+.enlistaPuestos:hover {
+    overflow-y: auto !important;
+    position:absolute;
+}
+
+.style-10::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+.style-10::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    /*background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, .2) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, .2) 50%, rgba(0, 0, 0, .2) 75%, transparent 75%, transparent);*/
 }
