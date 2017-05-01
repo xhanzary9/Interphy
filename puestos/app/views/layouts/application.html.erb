@@ -11,6 +11,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 
 </head>
 
@@ -21,17 +22,17 @@
     <div class="nav-wrapper">
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-      <li>
-        <%= link_to "Inicio", root_path%>   
-      </li>
-        <%if user_signed_in?%>
-          <%if current_user.isAdmin?%>
-          <li>
-            <%= link_to "Administrar cuentas", users_index_path%>   
-          </li>
-          <%end%>
         <li>
-        <%= link_to "Ver cuenta", principal_index_path%>   
+          <%= link_to "Inicio", root_path%>   
+        </li>
+        <%if user_signed_in?%>
+        <%if current_user.isAdmin?%>
+        <li>
+          <%= link_to "Administrar cuentas", users_index_path%>   
+        </li>
+        <%end%>
+        <li>
+          <%= link_to "Ver cuenta", principal_index_path%>   
         </li>
         <li>
          <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
@@ -46,16 +47,27 @@
       <%end%>
     </ul>
     <ul class="side-nav" id="mobile-demo">
+      <li class="navi">
+        <i class="material-icons icon-nav">home</i><%= link_to "Inicio", root_path%>   
+      </li><br>
       <%if user_signed_in?%>
-      <li>
-        <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
-      </li>
+      <%if current_user.isAdmin?%>
+      <li class="navi">
+        <i class="material-icons icon-nav">supervisor_account</i><%= link_to "Administrar cuentas", users_index_path%>   
+      </li><br>
+      <%end%>
+      <li class="navi">
+        <i class="material-icons icon-nav">account_circle</i><%= link_to "Ver cuenta", principal_index_path%>   
+      </li><br>
+      <li class="navi">
+        <i class="material-icons icon-nav">exit_to_app</i><%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
+      </li><br>
       <%else%>
-      <li>
-        <%= link_to "Iniciar sesion", new_user_session_path%> 
-      </li>
-      <li>
-        <%= link_to "Registrate", new_user_registration_path%> 
+      <li class="navi">
+        <i class="material-icons icon-nav">lock</i><%= link_to "Iniciar sesion", new_user_session_path%> 
+      </li><br>
+      <li class="navi">
+        <i class="material-icons icon-nav">home</i><%= link_to "Registrate", new_user_registration_path%> 
       </li>
 
       <%end%>
@@ -71,11 +83,11 @@
 <footer class="page-footer">
   <div class="container">
     <div class="row">
-      <div class="col l6 s12">
-      <h5 class="white-text">Desarrollado por <h5 class="interphy">Interphy</h5></h5>
+      <div class="col l6 s6">
+        <h5 class="white-text">Desarrollado por <h5 class="interphy">Interphy</h5></h5>
         <p class="grey-text text-lighten-4">En el equipo de desarrollo de Interphy somos personas especializadas en el desarrollo de Software además de ser amantes de la tecnología.</p>
       </div>
-      <div class="col l4 offset-l2 s12">
+      <div class="col l4 s6">
         <h5 class="white-text">Equipo</h5>
         <ul>
           <li><a class="grey-text text-lighten-3" href="#!">Aguilar Valenzuela Zaide Esther</a></li>

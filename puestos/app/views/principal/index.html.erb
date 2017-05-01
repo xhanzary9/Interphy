@@ -1,4 +1,7 @@
-
-<%if user_signed_in? %>
-<%= current_user.email%><br/>
-<%end%>
+<div class="centrado">
+	
+<i class="material-icons cuenta">account_circle</i><br>
+	<%if user_signed_in? %>
+	<h3><%= current_user.email%></h3>
+	<%end%>
+</div>

@@ -1,8 +1,25 @@
+<h1>Cuentas de usuarios</h1>
 <%if user_signed_in? && current_user.isAdmin?%>
-	<% @users = User.all%>
-	<% @users.each do |u|%>
-		<%= u.email%><br/>
-	<%end%>
+<% @users = User.all%>
+<% @users.each do |u|%>
+<table class="highlight">
+	<thead>
+		<tr>
+			<th>Correo</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td><%= u.email%></td>
+			<%end%>
+			<td><i class="material-icons">delete</i></td>
+			<td><i class="material-icons">mode_edit</i></td>
+		</tr>
+	</tbody>
+</table>
 <%else%>
-	<%= current_user.email%><br/>
+<%= current_user.email%><br/>
 <%end%>
