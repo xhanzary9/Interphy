@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  def index
-  end
-
-  def perfil
-  	
+  def new
+  	@user = current_user
+  	@user.calificas.build
+  	@user.puestos.build
   end
 end

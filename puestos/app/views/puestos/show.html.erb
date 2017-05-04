@@ -90,10 +90,11 @@
 
 
 <%if user_signed_in?%>
-<%= link_to "Añade un comentario", new_califica_path%>
-<%if false%>
+
   <h3>Añade un comentario</h3>
+  
   <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
+  
     <p>
       <%= f.label :comentario %><br>
       <%= f.text_area :comentario %>
@@ -106,7 +107,6 @@
       <%= f.submit %>
     </p>
   <% end %>
-  <%end%>
 <%end%>
 </div>
 

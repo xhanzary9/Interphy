@@ -24,15 +24,24 @@ class CalificasController < ApplicationController
   # POST /calificas
   # POST /calificas.json
   def create
-    @califica = Califica.new(califica_params)
 
-    respond_to do |format|
-      if @califica.save
-        format.html { redirect_to @califica, notice: 'Califica was successfully created.' }
-        format.json { render :show, status: :created, location: @califica }
-      else
-        format.html { render :new }
-        format.json { render json: @califica.errors, status: :unprocessable_entity }
+    @puesto = Puesto.find(params[:puesto_id])
+    parametros = califica_params
+    parametros[:user_id] = current_user.id
+    #califica_params[:user_id] = current_user.id
+    @califica = @puesto.calificas.create(parametros) #@puesto.calificas.create({:user_id => 1, :puesto_id => 1, :comentario => "bien", :estrellas => 2}) #Califica.new(califica_params)
+
+    redirect_to puesto_path(@puesto)
+
+    if false
+      respond_to do |format|
+        if @califica.save
+          format.html { redirect_to @califica, notice: 'Califica was successfully created.' }
+          format.json { render :show, status: :created, location: @califica }
+        else
+          format.html { render :new }
+          format.json { render json: @califica.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -69,7 +78,7 @@ class CalificasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def califica_params
-      @user_id = current_user.id
-      params.require(:califica).permit(:user_id, :puesto_id, :comentario, :estrellas)
+      #@user_id = current_user.id
+      params.require(:califica).permit(:user_id,:comentario, :estrellas)
     end
 end

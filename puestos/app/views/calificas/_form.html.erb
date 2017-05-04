@@ -1,3 +1,4 @@
+<%if false%>
 <%= form_for(califica) do |f| %>
   <% if califica.errors.any? %>
     <div id="error_explanation">
@@ -35,3 +36,21 @@
     <%= f.submit "Comentar" %>
   </div>
 <% end %>
+<% end %>
+
+ <h3>Añade un comentario</h3>
+  
+  <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
+  
+    <p>
+      <%= f.label :comentario %><br>
+      <%= f.text_area :comentario %>
+    </p>
+    <p>
+      <%= f.label :estrellas%>
+      <%= f.number_field :estrellas%>  
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
