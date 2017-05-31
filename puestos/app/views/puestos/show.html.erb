@@ -82,16 +82,28 @@
   <%= @puesto.coordenadas %>
 </p>
 -->
-<h2>Comentarios</h2>
+
+<h6>Estrellas</h6>
+<%= Califica.average(:estrellas)%>
+
+<h6>Comentarios</h6>
 <% @puesto.calificas.each do |c|%>
   <%= c.user.email%>:
-  <%= c.comentario%><br>
+  <%= c.comentario%>. 
+  Calificación: <%= c.estrellas%>
+  <br>
+
+  <%if current_user.id == c.user_id%>
+    <%= link_to 'Editar comentario', edit_puesto_califica_path(@puesto,c) %> 
+    <%= link_to 'Eliminar comentario', [@puesto,c], method: :delete, data: {confirm: "Seguro?"} %> 
+    <br>
+  <%end%>
+
 <%end%>
 
 
-<%if user_signed_in?%>
-
-  <h3>Añade un comentario</h3>
+<%if user_signed_in? && !current_user.isAdmin?%>
+  <h6>Añade un comentario</h6>
   
   <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
   
@@ -101,7 +113,7 @@
     </p>
     <p>
       <%= f.label :estrellas%>
-      <%= f.number_field :estrellas%>  
+      <%= f.number_field :estrellas, min: 1, max: 5%>  
     </p>
     <p>
       <%= f.submit %>
@@ -112,6 +124,9 @@
 
 <%if user_signed_in? && current_user.isAdmin?%>
   <%= link_to 'Editar puesto', edit_puesto_path(@puesto) %> 
+  <%= link_to 'Eliminar puesto', puesto_path(@puesto),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
 <%end%>
 <%= link_to "Regresar".html_safe, puestos_path %>
 

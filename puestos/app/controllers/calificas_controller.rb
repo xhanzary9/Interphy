@@ -1,5 +1,6 @@
 class CalificasController < ApplicationController
-  before_action :set_califica, only: [:show, :edit, :update, :destroy]
+  before_action :set_califica, only: [:show, :edit, :update]
+  before_action :check_califica, only: [:new, :create]
 
   # GET /calificas
   # GET /calificas.json
@@ -19,6 +20,8 @@ class CalificasController < ApplicationController
 
   # GET /calificas/1/edit
   def edit
+    @puesto = Puesto.find(params[:puesto_id])
+    @califica = @puesto.calificas.find(params[:id])
   end
 
   # POST /calificas
@@ -63,10 +66,16 @@ class CalificasController < ApplicationController
   # DELETE /calificas/1
   # DELETE /calificas/1.json
   def destroy
+    @puesto = Puesto.find(params[:puesto_id])
+    @califica = @puesto.calificas.find(params[:id])
     @califica.destroy
+
+    redirect_to puesto_path(@puesto)
+    if false
     respond_to do |format|
       format.html { redirect_to calificas_url, notice: 'Califica was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 
@@ -80,5 +89,13 @@ class CalificasController < ApplicationController
     def califica_params
       #@user_id = current_user.id
       params.require(:califica).permit(:user_id,:comentario, :estrellas)
+    end
+
+    def check_califica
+      #@puesto = Puesto.find(params[:puesto_id])
+      #if @puesto.calificas.find(params[:id])
+        #flash[:notice] = "Ya has comentado antes, puedes editarlo si quieres"
+        #redirect_to puesto_path(@puesto)
+      #end
     end
 end
