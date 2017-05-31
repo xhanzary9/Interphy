@@ -66,7 +66,7 @@
 *crear el maker del puesto que se creara o editara
 */
     handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {styles: mapStyle}, internal: {id: 'MapaEditar'}}, function(){
+    handler.buildMap({ provider: {styles: mapStyle,center: {lat: 19.323657, lng:-99.179663 },}, internal: {id: 'MapaEditar'}}, function(){
       marker = handler.addMarkers(
         [
           {
@@ -74,7 +74,7 @@
               <% if @puestoe.lat != " " && @puestoe.lng != " " %>
                 "lat": <%= @puestoe.lat %>,
                 "lng": <%= @puestoe.lng %>,
-                <% else %>
+              <% else %>
                 "lat": 19.323657, 
                 "lng": -99.179663,
               <% end %>
@@ -94,6 +94,7 @@
       markers = handler.addMarkers(<%=raw @hash.to_json %>);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
+      handler.getMap().setZoom(18);
 
       // Move existing marker
       google.maps.event.addListener(marker[0].serviceObject, 'dragend', function() {

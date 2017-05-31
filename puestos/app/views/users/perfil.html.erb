@@ -1,62 +1,63 @@
-
-
-<div class ="hola"style='width: 100%;'> 
-    <div id="multi_markers" class = "map"></div>
-    <div class = "puestos">
-        <h1>Puestos</h1>
-        <div class="row enlistaPuestos style-10">
-          <% @puestos.each do |puesto| %>
-          <div class="col m12">
-            <div class="card-panel" style="width : 410px ">
-              <span class="white-text">
-                  <%= puesto.nombre %> 
-              </span>
-              <div class="card-action">
-                  <%= link_to 'visibility', puesto, :class=>"medium material-icons visibility"%>
-              </div>
-          </div>
-      </div>
-      <%end%>
+<div class="container">
+  <div class ="hola"style='width: 100%;'> 
+      <div id="multi_markers" class = "map"></div>
+      <div class = "puestos">
+          <h1>Puestos</h1>
+          <div class="row enlistaPuestos style-10">
+            <% @puestos.each do |puesto| %>
+            <div class="col m12">
+              <div class="card-panel" style="width : 410px ">
+                <span class="white-text">
+                    <%= puesto.nombre %> 
+                </span>
+                <div class="card-action">
+                    <%= link_to 'visibility', puesto, :class=>"medium material-icons visibility"%>
+                </div>
+            </div>
+        </div>
+        <%end%>
+    </div>
   </div>
+  </div>
+  <%if user_signed_in? && current_user.isAdmin?%>
+  <div class="fixed-action-btn">
+    <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>
+  </div>
+  <%end%>
+  <br>
+  <%= link_to "navigate_before".html_safe, root_path, :class=>"medium material-icons" %>
 </div>
-</div>
-<%if user_signed_in? && current_user.isAdmin?%>
-<div class="fixed-action-btn">
-  <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>
-</div>
-<%end%>
-<br>
-<%= link_to "navigate_before".html_safe, root_path, :class=>"medium material-icons" %>
 
-<!--
-<h1>Puestos</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Numpuestounam</th>
-      <th>Imagen</th>
-      <th>Horario</th>
-      <th>Info general</th>
-      <th>Coordenadas</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @puestos.each do |puesto| %>
+  <!--
+  <h1>Puestos</h1>
+  <table>
+    <thead>
       <tr>
-        <td><%= puesto.nombre %></td>
-        <td><%= puesto.numPuestoUNAM %></td>
-        <td><%= puesto.imagen %></td>
-        <td><%= puesto.horario %></td>
-        <td><%= puesto.info_general %></td>
-        <td><%= puesto.coordenadas %></td>
-        <td><%= link_to 'Show', puesto %></td>
-        <td><%= link_to 'Edit', edit_puesto_path(puesto) %></td>
-        <td><%= link_to 'Destroy', puesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Nombre</th>
+        <th>Numpuestounam</th>
+        <th>Imagen</th>
+        <th>Horario</th>
+        <th>Info general</th>
+        <th>Coordenadas</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
+    </thead>
+
+    <tbody>
+      <% @puestos.each do |puesto| %>
+        <tr>
+          <td><%= puesto.nombre %></td>
+          <td><%= puesto.numPuestoUNAM %></td>
+          <td><%= puesto.imagen %></td>
+          <td><%= puesto.horario %></td>
+          <td><%= puesto.info_general %></td>
+          <td><%= puesto.coordenadas %></td>
+          <td><%= link_to 'Show', puesto %></td>
+          <td><%= link_to 'Edit', edit_puesto_path(puesto) %></td>
+          <td><%= link_to 'Destroy', puesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+
   </tbody>
 </table>
 

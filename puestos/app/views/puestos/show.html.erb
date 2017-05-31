@@ -1,119 +1,121 @@
-   <div class="card">
-    <div class="card-image waves-effect waves-block waves-light">
-       <div class="slider">
-    <ul class="slides">
-      <li>
-        <img class="activator" src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img class="activator" src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
-        <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img class="activator" src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
-        <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-      <li>
-        <img class="activator" src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
+<div class="container">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+         <div class="slider">
+      <ul class="slides">
+        <li>
+          <img class="activator" src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>This is our big Tagline!</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          </div>
+        </li>
+        <li>
+          <img class="activator" src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
+          <div class="caption left-align">
+            <h3>Left Aligned Caption</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          </div>
+        </li>
+        <li>
+          <img class="activator" src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+          <div class="caption right-align">
+            <h3>Right Aligned Caption</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          </div>
+        </li>
+        <li>
+          <img class="activator" src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>This is our big Tagline!</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4"><%= @puesto.nombre %><i class="material-icons right">close</i></span>
-      <p>
-        <strong>Horario:</strong>
-        <%= @puesto.horario %>
-        <%= @puesto.lat%>
-        <%= @puesto.lng%>
-      </p>
-      <p>
-        <strong>Info general:</strong>
-        <%= @puesto.info_general %>
-      </p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4"><%= @puesto.nombre %><i class="material-icons right">close</i></span>
+        <p>
+          <strong>Horario:</strong>
+          <%= @puesto.horario %>
+          <%= @puesto.lat%>
+          <%= @puesto.lng%>
+        </p>
+        <p>
+          <strong>Info general:</strong>
+          <%= @puesto.info_general %>
+        </p>
+      </div>
     </div>
-  </div>
 
 
-<div class = "puestoDetalles">
-<p id="notice"><%= notice %></p>
-<!--
-<p>
-  <strong>Nombre:</strong>
-  <%= @puesto.nombre %>
-</p>
+  <div class = "puestoDetalles">
+  <p id="notice"><%= notice %></p>
+  <!--
+  <p>
+    <strong>Nombre:</strong>
+    <%= @puesto.nombre %>
+  </p>
 
-<p>
-  <strong>Numpuestounam:</strong>
-  <%= @puesto.numPuestoUNAM %>
-</p>
+  <p>
+    <strong>Numpuestounam:</strong>
+    <%= @puesto.numPuestoUNAM %>
+  </p>
 
-<p>
-  <strong>Imagen:</strong>
-  <%= @puesto.imagen %>
-</p>
+  <p>
+    <strong>Imagen:</strong>
+    <%= @puesto.imagen %>
+  </p>
 
-<p>
-  <strong>Horario:</strong>
-  <%= @puesto.horario %>
-</p>
+  <p>
+    <strong>Horario:</strong>
+    <%= @puesto.horario %>
+  </p>
 
-<p>
-  <strong>Info general:</strong>
-  <%= @puesto.info_general %>
-</p>
+  <p>
+    <strong>Info general:</strong>
+    <%= @puesto.info_general %>
+  </p>
 
-<p>
-  <strong>Coordenadas:</strong>
-  <%= @puesto.coordenadas %>
-</p>
--->
-<h2>Comentarios</h2>
-<% @puesto.calificas.each do |c|%>
-  <%= c.user.email%>:
-  <%= c.comentario%><br>
-<%end%>
-
-
-<%if user_signed_in?%>
-<%= link_to "Añade un comentario", new_califica_path%>
-<%if false%>
-  <h3>Añade un comentario</h3>
-  <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
-    <p>
-      <%= f.label :comentario %><br>
-      <%= f.text_area :comentario %>
-    </p>
-    <p>
-      <%= f.label :estrellas%>
-      <%= f.number_field :estrellas%>  
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
-  <% end %>
+  <p>
+    <strong>Coordenadas:</strong>
+    <%= @puesto.coordenadas %>
+  </p>
+  -->
+  <h2>Comentarios</h2>
+  <% @puesto.calificas.each do |c|%>
+    <%= c.user.email%>:
+    <%= c.comentario%><br>
   <%end%>
-<%end%>
-</div>
 
-<%if user_signed_in? && current_user.isAdmin?%>
-  <%= link_to 'Editar puesto', edit_puesto_path(@puesto) %> 
-<%end%>
-<%= link_to "Regresar".html_safe, puestos_path %>
+
+  <%if user_signed_in?%>
+  <%= link_to "Añade un comentario", new_califica_path%>
+  <%if false%>
+    <h3>Añade un comentario</h3>
+    <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
+      <p>
+        <%= f.label :comentario %><br>
+        <%= f.text_area :comentario %>
+      </p>
+      <p>
+        <%= f.label :estrellas%>
+        <%= f.number_field :estrellas%>  
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+    <%end%>
+  <%end%>
+  </div>
+
+  <%if user_signed_in? && current_user.isAdmin?%>
+    <%= link_to 'Editar puesto', edit_puesto_path(@puesto) %> 
+  <%end%>
+  <%= link_to "Regresar".html_safe, puestos_path %>
+</div>
 
 
 <script type="text/javascript" >

@@ -1,33 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Calificas</h1>
+  <h1>Calificas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Puesto</th>
-      <th>Comentario</th>
-      <th>Estrellas</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @calificas.each do |califica| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= califica.user %></td>
-        <td><%= califica.puesto %></td>
-        <td><%= califica.comentario %></td>
-        <td><%= califica.estrellas %></td>
-        <td><%= link_to 'Show', califica %></td>
-        <td><%= link_to 'Edit', edit_califica_path(califica) %></td>
-        <td><%= link_to 'Destroy', califica, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>User</th>
+        <th>Puesto</th>
+        <th>Comentario</th>
+        <th>Estrellas</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @calificas.each do |califica| %>
+        <tr>
+          <td><%= califica.user %></td>
+          <td><%= califica.puesto %></td>
+          <td><%= califica.comentario %></td>
+          <td><%= califica.estrellas %></td>
+          <td><%= link_to 'Show', califica %></td>
+          <td><%= link_to 'Edit', edit_califica_path(califica) %></td>
+          <td><%= link_to 'Destroy', califica, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Califica', new_califica_path %>
+  <br>
+
+  <%= link_to 'New Califica', new_califica_path %>
+</div>

@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @califica.user.email %>
-</p>
+	<p>
+	  <strong>User:</strong>
+	  <%= @califica.user.email %>
+	</p>
 
-<p>
-  <strong>Puesto:</strong>
-  <%= @califica.puesto.nombre %>
-</p>
+	<p>
+	  <strong>Puesto:</strong>
+	  <%= @califica.puesto.nombre %>
+	</p>
 
-<p>
-  <strong>Comentario:</strong>
-  <%= @califica.comentario %>
-</p>
+	<p>
+	  <strong>Comentario:</strong>
+	  <%= @califica.comentario %>
+	</p>
 
-<p>
-  <strong>Estrellas:</strong>
-  <%= @califica.estrellas %>
-</p>
+	<p>
+	  <strong>Estrellas:</strong>
+	  <%= @califica.estrellas %>
+	</p>
 
-<%= link_to 'Edit', edit_califica_path(@califica) %> |
-<%= link_to 'Back', puestos_path %>
+	<%= link_to 'Edit', edit_califica_path(@califica) %> |
+	<%= link_to 'Back', puestos_path %>
+</div>

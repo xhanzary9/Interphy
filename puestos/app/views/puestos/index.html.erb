@@ -1,49 +1,85 @@
-
-
-<div class ="hola"style='width: 100%;'> 
-    <div id="MapaPuestos" class = "map"></div>
-    <div class = "puestos">
-        <h1>Puestos</h1>
-        <div class="row enlistaPuestos style-10">
-          <% @puestos.each do |puesto| %>
-          <div class="col m12">
-            <div class="card-panel" style="width : 410px ">
-              <span class="white-text">
-                  <%= puesto.nombre %> 
-              </span>
-              <div class="card-action">
-                  <%= link_to 'visibility', puesto, :class=>"medium material-icons visibility"%>
-              </div>
-          </div>
-      </div>
-      <%end%>
+  <div class ="hola"style='width: 100%;'> 
+      <div id='sidebar_container'>
+      <div id="MapaPuestos" class = "map"></div>
+      <div class = "puestos">
+          <h1>Puestos</h1>
+          <div class="row enlistaPuestos style-10">
+            <% @puestos.each do |puesto| %>
+            <div class="col m12">
+              <div class="card-panel" style="width : 410px ">
+                <div class="row">
+                  <div class="col s7">
+                  <%= link_to(puesto) do %>
+                    <span class="flow-text white-text"><%= puesto.nombre %> </span>
+                  <% end %>
+                  </div>
+                  <div class="col s5">
+                    <div class="row">
+                      <div class="col s4 place"><%= link_to 'place', puesto, :class=>"medium material-icons"%></div>
+                      <div class="col s4"><%= link_to 'edit', edit_puesto_path(puesto), :class=>"medium material-icons " %></div>
+                      <div class="col s4"><%= link_to 'delete', puesto, :class=>"medium material-icons", method: :delete, data: { confirm: '¿Estas seguro?' } %></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <%end%>
+    </div>
   </div>
-</div>
-</div>
-<%if user_signed_in? && current_user.isAdmin?%>
-<div class="fixed-action-btn">
-  <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>
-</div>
-<%end%>
-<br>
-<%= link_to "navigate_before".html_safe, root_path, :class=>"medium material-icons" %>
+  </div>
+  <%if user_signed_in? && current_user.isAdmin?%>
+  <div class="fixed-action-btn">
+    <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>
+  </div>
+  <%end%>
+  <br>
+  <%= link_to "navigate_before".html_safe, root_path, :class=>"medium material-icons" %>
+
 
 
 <script  type="text/javascript" async defer>
-  
-  /*
-  *Se crea el mapa con todos los markers de los puestos existentes
-  */
+  /*Se crea el mapa con todos los markers de los puestos existentes*/
+      var json_array = <%=raw @hash.to_json %>;
       var handler = Gmaps.build('Google');
+
       handler.buildMap({ internal: {id: 'MapaPuestos'},provider: {
           mapTypeId: 'roadmap',
-          styles:    mapStyle
+          styles:    mapStyle,
+          center: {lat: 19.323657, lng:-99.179663 },
       }}, function(){
-          markers = handler.addMarkers(<%=raw @hash.to_json %>);
+          markers = handler.addMarkers(json_array);
+          _.each(json_array, function(json, index){
+          json.marker = markers[index];
+          });
+          createSidebar(json_array);
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
+          handler.getMap().setZoom(18);
       });
+             
+      function createSidebarLi(json){
+        return ("<li style ='display:none;'><a>" + json.infowindow + "</a></li>");
+      };
 
+      function bindLiToMarker($li, marker){
+        $li.on('click', function(){
+          handler.getMap().setZoom(18);
+          marker.setMap(handler.getMap()); //because clusterer removes map property from marker
+          marker.panTo();
+          google.maps.event.trigger(marker.getServiceObject(), 'click');
+        })
+      };
+
+      function createSidebar(json_array){
+        _.each(json_array, function(json){
+          var $li = $( createSidebarLi(json) );
+          $li.appendTo('#sidebar_container');
+          bindLiToMarker($li, json.marker);
+        });
+      };
+
+      var info = $(this).parents('.col.s5').siblings('.col.s7').children().text();
+      //$('a:contains('info')').click();
 </script>
 
 
