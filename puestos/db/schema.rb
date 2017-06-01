@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170426235355) do
 
-  create_table "calificas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "calificas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.integer  "puesto_id"
     t.text     "comentario", limit: 65535
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170426235355) do
     t.index ["user_id"], name: "index_calificas_on_user_id", using: :btree
   end
 
-  create_table "comidas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "comidas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text     "tipo",       limit: 65535
     t.float    "costo",      limit: 24
     t.integer  "puesto_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170426235355) do
     t.index ["puesto_id"], name: "index_comidas_on_puesto_id", using: :btree
   end
 
-  create_table "puestos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "puestos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "nombre"
     t.integer  "numPuestoUNAM"
     t.string   "imagen"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170426235355) do
     t.string   "lng"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"

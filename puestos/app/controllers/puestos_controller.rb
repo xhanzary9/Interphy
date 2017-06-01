@@ -26,6 +26,8 @@ class PuestosController < ApplicationController
       marker.lat puesto.lat
       marker.lng puesto.lng
       marker.infowindow puesto.nombre
+    @puesto.calificas.build
+    #@puesto.users.build
     end
   end
 

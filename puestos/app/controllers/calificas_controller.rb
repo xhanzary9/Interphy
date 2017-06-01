@@ -1,5 +1,6 @@
 class CalificasController < ApplicationController
-  before_action :set_califica, only: [:show, :edit, :update, :destroy]
+  before_action :set_califica, only: [:show, :edit, :update]
+  before_action :check_califica, only: [:new, :create]
 
   # GET /calificas
   # GET /calificas.json
@@ -19,20 +20,31 @@ class CalificasController < ApplicationController
 
   # GET /calificas/1/edit
   def edit
+    @puesto = Puesto.find(params[:puesto_id])
+    @califica = @puesto.calificas.find(params[:id])
   end
 
   # POST /calificas
   # POST /calificas.json
   def create
-    @califica = Califica.new(califica_params)
 
-    respond_to do |format|
-      if @califica.save
-        format.html { redirect_to @califica, notice: 'Califica was successfully created.' }
-        format.json { render :show, status: :created, location: @califica }
-      else
-        format.html { render :new }
-        format.json { render json: @califica.errors, status: :unprocessable_entity }
+    @puesto = Puesto.find(params[:puesto_id])
+    parametros = califica_params
+    parametros[:user_id] = current_user.id
+    #califica_params[:user_id] = current_user.id
+    @califica = @puesto.calificas.create(parametros) #@puesto.calificas.create({:user_id => 1, :puesto_id => 1, :comentario => "bien", :estrellas => 2}) #Califica.new(califica_params)
+
+    redirect_to puesto_path(@puesto)
+
+    if false
+      respond_to do |format|
+        if @califica.save
+          format.html { redirect_to @califica, notice: 'Califica was successfully created.' }
+          format.json { render :show, status: :created, location: @califica }
+        else
+          format.html { render :new }
+          format.json { render json: @califica.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -54,10 +66,16 @@ class CalificasController < ApplicationController
   # DELETE /calificas/1
   # DELETE /calificas/1.json
   def destroy
+    @puesto = Puesto.find(params[:puesto_id])
+    @califica = @puesto.calificas.find(params[:id])
     @califica.destroy
+
+    redirect_to puesto_path(@puesto)
+    if false
     respond_to do |format|
       format.html { redirect_to calificas_url, notice: 'Califica was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 
@@ -69,7 +87,15 @@ class CalificasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def califica_params
-      @user_id = current_user.id
-      params.require(:califica).permit(:user_id, :puesto_id, :comentario, :estrellas)
+      #@user_id = current_user.id
+      params.require(:califica).permit(:user_id,:comentario, :estrellas)
+    end
+
+    def check_califica
+      #@puesto = Puesto.find(params[:puesto_id])
+      #if @puesto.calificas.find(params[:id])
+        #flash[:notice] = "Ya has comentado antes, puedes editarlo si quieres"
+        #redirect_to puesto_path(@puesto)
+      #end
     end
 end
