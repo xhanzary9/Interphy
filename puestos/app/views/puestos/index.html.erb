@@ -15,7 +15,7 @@
                   </div>
                   <div class="col s5">
                     <div class="row">
-                      <div class="col s4 place"><%= link_to 'place', puesto, :class=>"medium material-icons"%></div>
+                      <div class="col s4 place"><i class="material-icons">place</i></div>
                       <div class="col s4"><%= link_to 'edit', edit_puesto_path(puesto), :class=>"medium material-icons " %></div>
                       <div class="col s4"><%= link_to 'delete', puesto, :class=>"medium material-icons", method: :delete, data: { confirm: '¿Estas seguro?' } %></div>
                     </div>
@@ -38,7 +38,8 @@
 
 
 <script  type="text/javascript" async defer>
-  /*Se crea el mapa con todos los markers de los puestos existentes*/
+  /*Se crea el mapa con todos los markers de los puestos existentes
+  */
       var json_array = <%=raw @hash.to_json %>;
       var handler = Gmaps.build('Google');
 
@@ -58,7 +59,7 @@
       });
              
       function createSidebarLi(json){
-        return ("<li style ='display:none;'><a>" + json.infowindow + "</a></li>");
+        return ("<li style='display:none;'><a class='bar'>" + json.infowindow + "</a></li>");
       };
 
       function bindLiToMarker($li, marker){
@@ -78,46 +79,12 @@
         });
       };
 
-      var info = $(this).parents('.col.s5').siblings('.col.s7').children().text();
-      //$('a:contains('info')').click();
+      $('div.place').on('click',function(){
+        var info = $(this).parents('.col.s5').siblings('.col.s7').children().text().trim();
+        $('a.bar:contains('+ info +')').click();
+      });
+
 </script>
-
-
-<!--
-<h1>Puestos</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Numpuestounam</th>
-      <th>Imagen</th>
-      <th>Horario</th>
-      <th>Info general</th>
-      <th>Coordenadas</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @puestos.each do |puesto| %>
-      <tr>
-        <td><%= puesto.nombre %></td>
-        <td><%= puesto.numPuestoUNAM %></td>
-        <td><%= puesto.imagen %></td>
-        <td><%= puesto.horario %></td>
-        <td><%= puesto.info_general %></td>
-        <td><%= puesto.coordenadas %></td>
-        <td><%= link_to 'Show', puesto %></td>
-        <td><%= link_to 'Edit', edit_puesto_path(puesto) %></td>
-        <td><%= link_to 'Destroy', puesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>-->
-
-
 
 
 
