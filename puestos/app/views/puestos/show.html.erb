@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 <div class="container">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
@@ -88,7 +89,9 @@
     <%= c.user.email%>:
     <%= c.comentario%><br>
   <%end%>
-
+  <!-- HTML -->
+<div id="rateYo"></div>
+<div id="rateYo2"></div>
 
   <%if user_signed_in?%>
   <%= link_to "Añade un comentario", new_califica_path%>
@@ -125,4 +128,32 @@
     });
 
  $('div.card').parents('.container').css({'width': '100%', 'max-width': '1980px'});
+
+ $(function () { // se puede modificar 
+ 
+  $("#rateYo").rateYo({
+    starWidth: "20px"
+  });
+ 
+});
+
+ $(function () {// no se puede modificar 
+ 
+  $("#rateYo2").rateYo({
+    rating: 3.2,
+    readOnly: true,
+    starWidth: "20px"
+  });
+});
+
+// Getter
+var normalFill = $("#rateYo").rateYo("option", "rating"); //obtener número
+
+// Setter
+$("#rateYo").rateYo("option", "rating", 5); //poner número
+
+
+
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
