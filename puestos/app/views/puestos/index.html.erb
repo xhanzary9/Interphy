@@ -10,14 +10,16 @@
                 <div class="row">
                   <div class="col s7">
                   <%= link_to(puesto) do %>
-                    <span class="flow-text white-text"><%= puesto.nombre %> </span>
+                    <span class="flow-text white-text"><%= puesto.nombre %></span>
                   <% end %>
                   </div>
                   <div class="col s5">
                     <div class="row">
-                      <div class="col s4 place"><i class="material-icons">place</i></div>
-                      <div class="col s4"><%= link_to 'edit', edit_puesto_path(puesto), :class=>"medium material-icons " %></div>
-                      <div class="col s4"><%= link_to 'delete', puesto, :class=>"medium material-icons", method: :delete, data: { confirm: '¿Estas seguro?' } %></div>
+                      <div class="col s4 place"><a class="material-icons">place</a></div>
+                      <%if user_signed_in? && current_user.isAdmin?%>
+                        <div class="col s4"><%= link_to 'edit', edit_puesto_path(puesto), :class=>"medium material-icons " %></div>
+                        <div class="col s4"><%= link_to 'delete', puesto, :class=>"medium material-icons", method: :delete, data: { confirm: '¿Estas seguro?' } %></div>
+                      <%end%>
                     </div>
                   </div>
                 </div>
@@ -27,9 +29,6 @@
     </div>
   </div>
   </div>
-<!--hola-->
-
-<!--hola-->
   <%if user_signed_in? && current_user.isAdmin?%>
   <div class="fixed-action-btn">
     <%= link_to "add".html_safe, new_puesto_path, :class=>"btn-floating btn-large large material-icons add" %>

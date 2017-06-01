@@ -22,13 +22,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :imagen %>
-    <%= f.text_field :imagen %>
+    <%= f.hidden_field  :imagen %>
   </div>
 
   <div class="field">
-    <%= f.label :horario %>
-    <%= f.time_field :horario %>
+    <%= f.hidden_field  :horario %>
   </div>
 
   <div class="field">
@@ -55,7 +53,7 @@
   <br>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Aceptar"%>
   </div>
 <% end %>
 

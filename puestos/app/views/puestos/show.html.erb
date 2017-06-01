@@ -1,56 +1,52 @@
-   <div class="card">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+  <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
        <div class="slider">
     <ul class="slides">
       <li>
         <img class="activator" src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
         <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          <h3></h3>
+          <h5 class="light grey-text text-lighten-3"></h5>
         </div>
       </li>
       <li>
         <img class="activator" src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
         <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          <h3></h3>
+          <h5 class="light grey-text text-lighten-3"></h5>
         </div>
       </li>
       <li>
         <img class="activator" src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
         <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          <h3></h3>
+          <h5 class="light grey-text text-lighten-3"></h5>
         </div>
       </li>
       <li>
         <img class="activator" src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
         <div class="caption center-align">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+          <h3></h3>
+          <h5 class="light grey-text text-lighten-3"></h5>
         </div>
       </li>
     </ul>
   </div>
     </div>
     <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4"><%= @puesto.nombre %><i class="material-icons right">close</i></span>
+      <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+      <h1><%= @puesto.nombre %></h1>
       <p>
-        <strong>Horario:</strong>
-        <%= @puesto.horario %>
-        <%= @puesto.lat%>
-        <%= @puesto.lng%>
-      </p>
-      <p>
-        <strong>Info general:</strong>
+        <h4><strong>Información general:</strong></h4>
         <%= @puesto.info_general %>
       </p>
     </div>
   </div>
 
-
 <div class = "puestoDetalles">
-<p id="notice"><%= notice %></p>
+<%= link_to 'keyboard_backspace', puestos_path, :class=>"medium material-icons " %>
 <!--
 <p>
   <strong>Nombre:</strong>
@@ -84,58 +80,98 @@
 -->
 
 <h6>Estrellas</h6>
-<%= Califica.average(:estrellas)%>
-
-<h6>Comentarios</h6>
+<% @lista = Califica.where(puesto_id: @puesto.id).pluck(:estrellas)%>
+<% @avg = @lista.inject{ |sum, el| sum + el }.to_f / @lista.size%>
+<%if !@avg.nan?%>
+  <%= @lista.inject{ |sum, el| sum + el }.to_f / @lista.size%><div id="rateYo2"></div>
+<%else%>
+  <span>0</span>
+  <div id="rateYo2"></div>
+<%end%>
+<div class = "comentarios">
+<%@c = 3%>
 <% @puesto.calificas.each do |c|%>
+<hr>
+  <div>Calificación:<span class="<%= @c%>"></span></div>
   <%= c.user.email%>:
   <%= c.comentario%>. 
-  Calificación: <%= c.estrellas%>
+  <script>
+    $(function () {// no se puede modificar 
+    
+   $("." + "<%= @c%>").rateYo({
+     readOnly: true,
+     starWidth: "20px",
+      rating:<%= c.estrellas%>
+   });
+ });
+  </script>
+  <%@c += 1%>
   <br>
 
-  <%if current_user.id == c.user_id%>
-    <%= link_to 'Editar comentario', edit_puesto_califica_path(@puesto,c) %> 
-    <%= link_to 'Eliminar comentario', [@puesto,c], method: :delete, data: {confirm: "Seguro?"} %> 
+  <%if user_signed_in? && current_user.id == c.user_id%>
+    <%= link_to 'Eliminar comentario', [@puesto,c], method: :delete, data: {confirm: "Seguro?"} %>
     <br>
   <%end%>
 
 <%end%>
-
+</div>
 
 <%if user_signed_in? && !current_user.isAdmin?%>
   <h6>Añade un comentario</h6>
-  
+  <div class="row">
   <%= form_for([@puesto, @puesto.calificas.build]) do |f| %>
   
     <p>
       <%= f.label :comentario %><br>
       <%= f.text_area :comentario %>
     </p>
-    <p>
-      <%= f.label :estrellas%>
-      <%= f.number_field :estrellas, min: 1, max: 5%>  
-    </p>
-    <p>
-      <%= f.submit %>
+    
+      <div id="rateYo"></div>
+      <%= f.hidden_field :estrellas, min: 1, max: 5%>  
+      <%= f.submit "Comentar", {class: 'boton-comentario'}%>
     </p>
   <% end %>
+  </div>
 <%end%>
 </div>
 
-<%if user_signed_in? && current_user.isAdmin?%>
-  <%= link_to 'Editar puesto', edit_puesto_path(@puesto) %> 
-  <%= link_to 'Eliminar puesto', puesto_path(@puesto),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-<%end%>
-<%= link_to "Regresar".html_safe, puestos_path %>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script> 
 <script type="text/javascript" >
-      $(document).ready(function(){
+    $(document).ready(function(){
       $('.slider').slider();
       $('.slider').height(400);
     });
 
  $('div.card').parents('.container').css({'width': '100%', 'max-width': '1980px'});
-</script>
+
+ 
+  $(function () { // se puede modificar 
+  
+   $("#rateYo").rateYo({
+     starWidth: "20px",
+     fullStar:true
+   });
+ });
+
+ 
+  $(function () {// no se puede modificar 
+  
+   $("#rateYo2").rateYo({
+     readOnly: true,
+     starWidth: "20px",
+      rating:<%= @avg%>
+   });
+ });
+ 
+ $('#rateYo').hover(function(){
+    var normalFill = $("#rateYo").rateYo("option", "rating"); //obtener número 
+    $('#califica_estrellas').val(normalFill);
+    console.log( normalFill);
+ });
+ 
+ // Setter
+ $("#rateYo").rateYo("option", "rating", 5); //poner número
+ 
+ </script>
+ 

@@ -62,3 +62,6 @@ gem 'material_icons'
 # Gmaps4Rails
 gem 'geocoder'
 gem 'gmaps4rails'
+
+# Paperclip
+gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
